@@ -1,28 +1,45 @@
 function userOptions {
     'Choose An Option:'
-    '1. Create User'
-    '2. Update User'
-    '3. Delete User'
-    '4. Return'
+    '1. Get User Info'
+    '2. Create User'
+    '3. Update User'
+    '4. Delete User'
+    '5. Return'
 
     $option = Read-Host -Prompt 'Enter Here'
 
     switch($option) {
-        1 {createUser}
-        2 {updateUser}
-        3 {deleteUser}
-        4 {}
+        1 {getUserInfo}
+        2 {createUser}
+        3 {updateUser}
+        4 {deleteUser}
+        5 {}
     }
 }
 
 function createUser {
-    $username = getUser
-    $firstname = Read-Host -Prompt 'Firstname'
-    $lastname = Read-Host -Prompt 'Lastname'
-    $password = Read-Host -Prompt 'Password'
-    $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
-    $org = Read-Host -Prompt 'OU'
-    gam create user $username firstname $firstname lastname $lastname password $password changepassword $changepassword org $org
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        $username = getUser
+        $firstname = Read-Host -Prompt 'Firstname'
+        $lastname = Read-Host -Prompt 'Lastname'
+        $password = Read-Host -Prompt 'Password'
+        $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
+        $org = Read-Host -Prompt 'OU'
+        gam create user $username firstname $firstname lastname $lastname password $password changepassword $changepassword org $org
+
+        $continue = Read-Host -Prompt 'Create another user? (y/n)'
+    }
+}
+
+function getUser {
+    $exists = 1
+    while($exists -eq 1) {
+        $username = Read-Host -Prompt 'Input Username'
+        $exists = 0
+    }
+    return $username
 }
 
 function updateUser {
@@ -43,13 +60,4 @@ function deleteUser {
 
         $continue = Read-Host -Prompt 'Delete another user? (y/n)'
     }
-}
-
-function getUser {
-    $exists = 1
-    while($exists -eq 1) {
-        $username = Read-Host -Prompt 'Input Username'
-        $exists = 0
-    }
-    return $username
 }
