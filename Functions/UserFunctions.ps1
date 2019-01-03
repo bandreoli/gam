@@ -23,6 +23,8 @@ function getUserInfo {
     while($continue -eq 'y') {
         $username = getUser
 
+        gam info user $username
+
         $continue = Read-Host -Prompt 'Get info from another user? (y/n)'
     }
 }
