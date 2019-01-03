@@ -1,19 +1,23 @@
 function userOptions {
-    'Choose An Option:'
-    '1. Get User Info'
-    '2. Create User'
-    '3. Update User'
-    '4. Delete User'
-    '5. Return'
+    $continue = 1
 
-    $option = Read-Host -Prompt 'Enter Here'
+    while($continue -eq 1) {
+        'User Options:'
+        '1. Get User Info'
+        '2. Create User'
+        '3. Update User'
+        '4. Delete User'
+        '5. Return'
 
-    switch($option) {
-        1 {getUserInfo}
-        2 {createUser}
-        3 {updateUser}
-        4 {deleteUser}
-        5 {}
+        $option = Read-Host -Prompt 'Enter Here'
+
+        switch($option) {
+            1 {getUserInfo}
+            2 {createUser}
+            3 {updateUser}
+            4 {deleteUser}
+            5 {$continue = 0}
+        }
     }
 }
 
