@@ -7,7 +7,8 @@ function userOptions {
         '2. Create User'
         '3. Update User'
         '4. Delete User'
-        '5. Return'
+        '5. Set Basic Password'
+        '6. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -17,7 +18,8 @@ function userOptions {
             2 {createUser}
             3 {updateUser}
             4 {deleteUser}
-            5 {$continue = 0}
+            5 {setBasicPassword}
+            6 {$continue = 0}
         }
     }
 }
@@ -128,6 +130,20 @@ function deleteUser {
         }
 
         $continue = Read-Host -Prompt 'Delete another user? (y/n)'
+        ''
+    }
+}
+
+function setBasicPassword() {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Setting the basic password 'Password123' for a user"
+        $username = getUser
+
+        gam update user $username password 'Password123' changepassword on
+
+        $continue = Read-Host -Prompt 'Set a basic password for another user? (y/n)'
         ''
     }
 }
