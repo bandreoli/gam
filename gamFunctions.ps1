@@ -10,6 +10,7 @@ while($continue -eq 1) {
     '4. Exit'
 
     $option = Read-Host -Prompt 'Enter Here'
+    ''
 
     switch($option) {
         1 {userOptions}
