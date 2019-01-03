@@ -1,8 +1,8 @@
 . "Functions\UserFunctions"
 
-$continue = 'y'
+$continue = 1
 
-while($continue -eq 'y') {
+while($continue -eq 1) {
     'Choose An Option:'
     '1. Users'
     '2. OUs'
@@ -15,12 +15,6 @@ while($continue -eq 'y') {
         1 {userOptions}
         2 {ouOptions}
         3 {groupOptions}
-        4 {}
-    }
-
-    if($option -eq 4) {
-        $continue = 0
-    } else {
-        $continue = Read-Host -Prompt 'Continue? (y/n)'
+        4 {$continue = 0}
     }
 }
