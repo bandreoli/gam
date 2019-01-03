@@ -17,6 +17,16 @@ function userOptions {
     }
 }
 
+function getUserInfo {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        $username = getUser
+
+        $continue = Read-Host -Prompt 'Get info from another user? (y/n)'
+    }
+}
+
 function createUser {
     $continue = 'y'
 
