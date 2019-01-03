@@ -39,12 +39,32 @@ function createUser {
     while($continue -eq 'y') {
         'Creating New User'
         $username = getUser
-        $firstname = Read-Host -Prompt 'Firstname'
-        $lastname = Read-Host -Prompt 'Lastname'
-        $password = Read-Host -Prompt 'Password'
+        $firstname = ""
+        $lastname = ""
+        $password = ""
+
+        while($firstname -eq "") {
+            $firstname = Read-Host -Prompt 'Firstname (Required)'
+        }
+        while($lastname -eq "") {
+            $lastname = Read-Host -Prompt 'Lastname (Required)'
+        }
+        while($password -eq "") {
+            $password = Read-Host -Prompt 'Password (Required)'
+        }
         $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
+        if($changepassword -ne "") {
+            $changepasswordcommand = " changepassword $changepassword"
+        }
         $org = Read-Host -Prompt 'OU'
-        gam create user $username firstname $firstname lastname $lastname password $password changepassword $changepassword org $org
+        if($org -ne "") {
+            $orgcommand = " org $org"
+        }
+        $command = "gam create user $username firstname $firstname lastname $lastname $changepasswordcommand $orgcommand"
+
+        $command
+
+        iex $command
 
         $continue = Read-Host -Prompt 'Create another user? (y/n)'
     }
@@ -73,7 +93,10 @@ function deleteUser {
 function getUser {
     $exists = 1
     while($exists -eq 1) {
-        $username = Read-Host -Prompt 'Input Username'
+        $username = ""
+        while($username -eq "") {
+            $username = Read-Host -Prompt 'Input Username (Required)'
+        }
         $exists = 0
     }
     return $username
