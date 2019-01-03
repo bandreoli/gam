@@ -21,6 +21,7 @@ function createUser {
     $continue = 'y'
 
     while($continue -eq 'y') {
+        'Creating New User'
         $username = getUser
         $firstname = Read-Host -Prompt 'Firstname'
         $lastname = Read-Host -Prompt 'Lastname'
@@ -31,15 +32,6 @@ function createUser {
 
         $continue = Read-Host -Prompt 'Create another user? (y/n)'
     }
-}
-
-function getUser {
-    $exists = 1
-    while($exists -eq 1) {
-        $username = Read-Host -Prompt 'Input Username'
-        $exists = 0
-    }
-    return $username
 }
 
 function updateUser {
@@ -60,4 +52,13 @@ function deleteUser {
 
         $continue = Read-Host -Prompt 'Delete another user? (y/n)'
     }
+}
+
+function getUser {
+    $exists = 1
+    while($exists -eq 1) {
+        $username = Read-Host -Prompt 'Input Username'
+        $exists = 0
+    }
+    return $username
 }
