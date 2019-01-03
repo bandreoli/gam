@@ -10,6 +10,7 @@ function userOptions {
         '5. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
+        ''
 
         switch($option) {
             1 {getUserInfo}
@@ -25,11 +26,13 @@ function getUserInfo {
     $continue = 'y'
 
     while($continue -eq 'y') {
+        'Getting User Info'
         $username = getUser
 
         gam info user $username
 
         $continue = Read-Host -Prompt 'Get info from another user? (y/n)'
+        ''
     }
 }
 
@@ -43,41 +46,79 @@ function createUser {
         $lastname = ""
         $password = ""
 
-        while($firstname -eq "") {
+        while($firstname -eq '') {
             $firstname = Read-Host -Prompt 'Firstname (Required)'
         }
-        while($lastname -eq "") {
+        while($lastname -eq '') {
             $lastname = Read-Host -Prompt 'Lastname (Required)'
         }
-        while($password -eq "") {
+        while($password -eq '') {
             $password = Read-Host -Prompt 'Password (Required)'
         }
         $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
-        if($changepassword -ne "") {
-            $changepasswordcommand = " changepassword $changepassword"
+        if($changepassword -ne '') {
+            $changepasswordcom = ' changepassword $changepassword'
         }
         $org = Read-Host -Prompt 'OU'
-        if($org -ne "") {
-            $orgcommand = " org $org"
+        if($org -ne '') {
+            $orgcom = ' org $org'
         }
-        $command = "gam create user $username firstname $firstname lastname $lastname $changepasswordcommand $orgcommand"
-
-        $command
+        $command = "gam create user $username firstname $firstname lastname $lastname password $password $changepasswordcom $orgcom"
 
         iex $command
 
         $continue = Read-Host -Prompt 'Create another user? (y/n)'
+        ''
     }
 }
 
 function updateUser {
-    $username = getUser
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Updating User'
+        'Leave option blank if you don''t want it modified' 
+        $username = getUser
+
+        $newusername = Read-Host -Prompt 'New Username'
+        if($newusername -ne '') {
+            $newusernamecom = ' username $newusername'
+        }
+        $firstname = Read-Host -Prompt 'Firstname'
+        if($firstname -ne '') {
+            $firstnamecom = ' firstname $firstname'
+        }
+        $lastname = Read-Host -Prompt 'Lastname'
+        if($lastname -ne '') {
+            $lastnamecom = ' lastname $lastname'
+        }
+        $password = Read-Host -Prompt 'Password'
+        if($password -ne '') {
+            $passwordcom = ' password $password'
+        }
+        $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
+        if($changepassword -ne '') {
+            $changepasswordcom = ' changepassword $changepassword'
+        }
+        $org = Read-Host -Prompt 'OU'
+        if($org -ne '') {
+            $orgcom = ' org $org'
+        }
+
+        $command = "gam update user $username $newusernamecom $firstnamecom $lastnamecom $passwordcom $changepasswordcom $orgcom"
+
+        iex $command
+
+        $continue = Read-Host -Prompt 'Update another user? (y/n)'
+        ''
+    }
 }
 
 function deleteUser {
     $continue = 'y'
 
     while($continue -eq 'y') {
+        'Deleting User'
         $username = getUser
 
         $delete = Read-Host -Prompt "Are you sure you want to delete $username ? (y/n)"
@@ -87,6 +128,7 @@ function deleteUser {
         }
 
         $continue = Read-Host -Prompt 'Delete another user? (y/n)'
+        ''
     }
 }
 
