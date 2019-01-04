@@ -8,7 +8,8 @@ function userOptions {
         '3. Update User'
         '4. Delete User'
         '5. Set Basic Password'
-        '6. Return'
+        '6. Transfer Drive Documents'
+        '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -19,7 +20,8 @@ function userOptions {
             3 {updateUser}
             4 {deleteUser}
             5 {setBasicPassword}
-            6 {$continue = 0}
+            6 {transferDriveDocuments}
+            10 {$continue = 0}
         }
     }
 }
@@ -134,7 +136,7 @@ function deleteUser {
     }
 }
 
-function setBasicPassword() {
+function setBasicPassword {
     $continue = 'y'
 
     while($continue -eq 'y') {
@@ -144,6 +146,24 @@ function setBasicPassword() {
         gam update user $username password 'Password123' changepassword on
 
         $continue = Read-Host -Prompt 'Set a basic password for another user? (y/n)'
+        ''
+    }
+}
+
+function transferDriveDocuments {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Transferring drive documents from one user to another"
+        "User one is tranferring their documents to user two"
+
+        $userone = Read-Host -Prompt 'Enter email one'
+
+        $usertwo = Read-Host -Prompt 'Enter email two'
+
+        gam user $userone transfer drive $usertwo
+
+        $continue = Read-Host -Prompt 'Transfer another users documents? (y/n)'
         ''
     }
 }
