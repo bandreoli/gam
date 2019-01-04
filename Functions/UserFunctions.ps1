@@ -9,6 +9,7 @@ function userOptions {
         '4. Delete User'
         '5. Set Basic Password'
         '6. Transfer Drive Documents'
+        '7. Transfer Drive Document To Archive'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -21,6 +22,7 @@ function userOptions {
             4 {deleteUser}
             5 {setBasicPassword}
             6 {transferDriveDocuments}
+            7 {transferDriveDocumentsArchive}
             10 {$continue = 0}
         }
     }
@@ -164,6 +166,21 @@ function transferDriveDocuments {
         gam user $userone transfer drive $usertwo
 
         $continue = Read-Host -Prompt 'Transfer another users documents? (y/n)'
+        ''
+    }
+}
+
+function transferDriveDocumentsArchive {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Transferring drive documents from a user to archive"
+
+        $userone = Read-Host -Prompt 'Enter email'
+
+        gam user $userone transfer drive "archive@carrolltest.org"
+
+        $continue = Read-Host -Prompt 'Transfer another users documents to archive? (y/n)'
         ''
     }
 }
