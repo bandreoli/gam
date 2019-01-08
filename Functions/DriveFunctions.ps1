@@ -16,37 +16,37 @@ function driveOptions {
             3 {$continue = 0}
         }
     }
+}
 
-    function transferDriveDocuments {
-        $continue = 'y'
+function transferDriveDocuments {
+    $continue = 'y'
 
-        while($continue -eq 'y') {
-            "Transferring drive documents from one user to another"
-            "User one is tranferring their documents to user two"
+    while($continue -eq 'y') {
+        "Transferring drive documents from one user to another"
+        "User one is tranferring their documents to user two"
 
-            $userone = Read-Host -Prompt 'Enter email one'
+        $userone = Read-Host -Prompt 'Enter email one'
 
-            $usertwo = Read-Host -Prompt 'Enter email two'
+        $usertwo = Read-Host -Prompt 'Enter email two'
 
-            gam user $userone transfer drive $usertwo
+        gam user $userone transfer drive $usertwo
 
-            $continue = Read-Host -Prompt 'Transfer another users documents? (y/n)'
-            ''
-        }
+        $continue = Read-Host -Prompt 'Transfer another users documents? (y/n)'
+        ''
     }
+}
 
-    function transferDriveDocumentsArchive {
-        $continue = 'y'
+function transferDriveDocumentsArchive {
+    $continue = 'y'
 
-        while($continue -eq 'y') {
-            "Transferring drive documents from a user to archive"
+    while($continue -eq 'y') {
+        "Transferring drive documents from a user to archive"
 
-            $userone = Read-Host -Prompt 'Enter email'
+        $userone = Read-Host -Prompt 'Enter email'
 
-            gam user $userone transfer drive "archive@carrolltest.org"
+        gam user $userone transfer drive "archive@carrolltest.org"
 
-            $continue = Read-Host -Prompt 'Transfer another users documents to archive? (y/n)'
-            ''
-        }
+        $continue = Read-Host -Prompt 'Transfer another users documents to archive? (y/n)'
+        ''
     }
 }
