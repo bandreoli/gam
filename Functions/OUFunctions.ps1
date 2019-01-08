@@ -5,7 +5,8 @@ function ouOptions {
         'OU Options'
         '1. Get OU Info'
         '2. Create OU'
-        '3. Return'
+        '3. Delete OU'
+        '4. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -13,7 +14,8 @@ function ouOptions {
         switch($option) {
             1 {getOUInfo}
             2 {createOU}
-            3 {$continue = 0}
+            3 {deleteOU}
+            4 {$continue = 0}
         }
     }
 }
@@ -25,7 +27,7 @@ function getOUInfo {
         'Getting OU Info'
 
         $ou = getOU
-        gam info org $ou
+        gam info org '$ou'
 
         $continue = Read-Host -Prompt 'Get info from another OU? (y/n)'
         ''
@@ -54,6 +56,21 @@ function createOU {
         iex $command
 
         $continue = Read-Host -Prompt 'Create another OU? (y/n)'
+        ''
+    }
+}
+
+function deleteOU {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Creating OU'
+
+        $ou = getOU
+
+        gam delete org $ou
+
+        $continue = Read-Host -Prompt 'Delete another OU? (y/n)'
         ''
     }
 }
