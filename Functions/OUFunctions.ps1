@@ -10,8 +10,30 @@ function ouOptions {
         ''
 
         switch($option) {
-            1 {}
+            1 {getOUInfo}
             2 {$continue = 0}
         }
     }
+}
+
+function getOUInfo {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Getting OU Info'
+
+        $ou = getOU
+        gam info org $ou
+
+        $continue = Read-Host -Prompt 'Get info from another OU? (y/n)'
+        ''
+    }
+}
+
+function getOU {
+    $ou = ""
+    while($ou -eq "") {
+        $ou = Read-Host -Prompt 'Input OU (Required)'
+    }
+    return $ou
 }
