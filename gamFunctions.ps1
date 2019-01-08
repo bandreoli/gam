@@ -5,6 +5,10 @@
 
 $continue = 1
 
+'Google Admin Management'
+'Ctrl+C to exit at any time'
+''
+
 while($continue -eq 1) {
     'Choose An Option:'
     '1. Users'
