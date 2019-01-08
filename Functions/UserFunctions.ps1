@@ -59,13 +59,13 @@ function createUser {
         }
         $changepassword = Read-Host -Prompt 'Change Password on Login? (on/off)'
         if($changepassword -ne '') {
-            $changepasswordcom = ' changepassword $changepassword'
+            $changepasswordcom = " changepassword '$changepassword'"
         }
         $org = Read-Host -Prompt 'OU'
         if($org -ne '') {
-            $orgcom = ' org $org'
+            $orgcom = " org '$org'"
         }
-        $command = "gam create user $username firstname $firstname lastname $lastname password $password $changepasswordcom $orgcom"
+        $command = "gam create user '$username' firstname '$firstname' lastname '$lastname' password '$password' $changepasswordcom $orgcom"
 
         iex $command
 
