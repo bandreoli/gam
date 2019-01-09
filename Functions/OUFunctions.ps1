@@ -6,7 +6,8 @@ function ouOptions {
         '1. Get OU Info'
         '2. Create OU'
         '3. Delete OU'
-        '4. Return'
+        '4. Add users to OU'
+        '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -15,7 +16,8 @@ function ouOptions {
             1 {getOUInfo}
             2 {createOU}
             3 {deleteOU}
-            4 {$continue = 0}
+            4 {addUsersToOU}
+            10 {$continue = 0}
         }
     }
 }
@@ -72,6 +74,23 @@ function deleteOU {
         gam delete org $ou
 
         $continue = Read-Host -Prompt 'Delete another OU? (y/n)'
+        ''
+    }
+}
+
+function addUsersToOU {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Adding users to OU'
+        'Separate users by spaces'
+
+        $ou = getOU
+        $users = Read-Host -Prompt 'Users'
+
+        iex "gam update org $ou add users '$users'"
+
+        $continue = Read-Host -Prompt 'Add more users to an OU? (y/n)'
         ''
     }
 }
