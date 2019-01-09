@@ -8,6 +8,7 @@ function userOptions {
         '3. Update User'
         '4. Delete User'
         '5. Set Basic Password'
+        '6. Search For Users By Name'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -19,6 +20,7 @@ function userOptions {
             3 {updateUser}
             4 {deleteUser}
             5 {setBasicPassword}
+            6 {getUsersByName}
             10 {$continue = 0}
         }
     }
@@ -144,6 +146,21 @@ function setBasicPassword {
         gam update user $username password 'Password123' changepassword on
 
         $continue = Read-Host -Prompt 'Set a basic password for another user? (y/n)'
+        ''
+    }
+}
+
+function getUsersByName {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Searching for users by name"
+
+        $name = Read-Host -Prompt 'Fullname'
+
+        iex "gam print users allfields query name:'$name'"
+
+        $continue = Read-Host -Prompt 'Search for another user? (y/n)'
         ''
     }
 }
