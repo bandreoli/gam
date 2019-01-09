@@ -166,13 +166,9 @@ function getUsersByName {
 }
 
 function getUser {
-    $exists = 1
-    while($exists -eq 1) {
-        $username = ""
-        while($username -eq "") {
-            $username = Read-Host -Prompt 'Input Username (Required)'
-        }
-        $exists = 0
+    $username = ""
+    while($username -eq "") {
+        $username = Read-Host -Prompt 'Input Username (Required)'
     }
     return $username
 }
