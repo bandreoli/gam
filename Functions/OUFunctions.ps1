@@ -29,7 +29,7 @@ function getOUInfo {
         'Getting OU Info'
 
         $ou = getOU
-        gam info org '$ou'
+        iex "gam info org '$ou'"
 
         $continue = Read-Host -Prompt 'Get info from another OU? (y/n)'
         ''
