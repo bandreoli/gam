@@ -64,7 +64,8 @@ function deleteOU {
     $continue = 'y'
 
     while($continue -eq 'y') {
-        'Creating OU'
+        'Deleting OU'
+        'Include Parent OU'
 
         $ou = getOU
 
