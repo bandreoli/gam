@@ -2,6 +2,7 @@
 . "Functions\DriveFunctions"
 . "Functions\OUFunctions"
 . "Functions\GroupFunctions"
+. "Functions\SchemaFunctions"
 
 $continue = 1
 
@@ -15,7 +16,8 @@ while($continue -eq 1) {
     '2. OUs'
     '3. Groups'
     '4. Drive'
-    '5. Exit'
+    '5. Schemas'
+    '6. Exit'
 
     $option = Read-Host -Prompt 'Enter Here'
     ''
@@ -25,6 +27,7 @@ while($continue -eq 1) {
         2 {ouOptions}
         3 {groupOptions}
         4 {driveOptions}
-        5 {$continue = 0}
+        5 {schemaOptions}
+        6 {$continue = 0}
     }
 }
