@@ -17,3 +17,25 @@ function schemaOptions {
         }
     }
 }
+
+function getSchemaInfo {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Getting Schema Info"
+
+        $schema = getSchema
+        iex "gam info schema '$schema'"
+
+        $continue = Read-Host -Prompt 'Get info from another Schema? (y/n)'
+        ''
+    }
+}
+
+function getSchema {
+    $schema = ""
+    while($schema -eq "") {
+        $schema = Read-Host -Prompt 'Input Group (Required)'
+    }
+    return $schema
+}
