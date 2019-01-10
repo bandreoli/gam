@@ -47,6 +47,26 @@ function createGroup {
     }
 }
 
+function deleteGroup {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Deleting Group'
+
+        $group = getGroup
+
+
+        $delete = Read-Host -Prompt "Are you sure you want to delete $group ? (y/n)"
+
+        if($delete -eq 'y') {
+            gam delete group $group
+        }
+
+        $continue = Read-Host -Prompt 'Delete another Group? (y/n)'
+        ''
+    }
+}
+
 function getGroup {
     $group = ""
     while($group -eq "") {
