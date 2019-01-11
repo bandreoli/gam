@@ -4,7 +4,8 @@ function schemaOptions {
     while($continue -eq 1) {
         'Schema Options'
         '1. Get Schema Info'
-        '2. Create A Schema'
+        '2. Create Schema'
+        '3. Delete Schema'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -13,6 +14,7 @@ function schemaOptions {
         switch($option) {
             1 {getSchemaInfo}
             2 {createSchema}
+            3 {deleteSchema}
             10 {$continue = 0}
         }
     }
@@ -92,6 +94,26 @@ function createSchema {
         iex $command
 
         $continue = Read-Host -Prompt 'Create another Schema? (y/n)'
+        ''
+    }
+}
+
+function deleteSchema {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Deleting Schema'
+
+        $schema = getSchema
+
+
+        $delete = Read-Host -Prompt "Are you sure you want to delete $schema ? (y/n)"
+
+        if($delete -eq 'y') {
+            gam delete schema $schema
+        }
+
+        $continue = Read-Host -Prompt 'Delete another schema? (y/n)'
         ''
     }
 }
