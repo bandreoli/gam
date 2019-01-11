@@ -1,8 +1,8 @@
-. "Functions\UserFunctions"
-. "Functions\DriveFunctions"
-. "Functions\OUFunctions"
-. "Functions\GroupFunctions"
-. "Functions\SchemaFunctions"
+. "functions\UserFunctions"
+. "functions\DriveFunctions"
+. "functions\OUFunctions"
+. "functions\GroupFunctions"
+. "functions\SchemaFunctions"
 
 $continue = 1
 
