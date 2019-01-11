@@ -4,8 +4,9 @@ function schemaOptions {
     while($continue -eq 1) {
         'Schema Options'
         '1. Get Schema Info'
-        '2. Create Schema'
-        '3. Delete Schema'
+        '2. Get All Schemas'
+        '3. Create Schema'
+        '4. Delete Schema'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -13,8 +14,9 @@ function schemaOptions {
 
         switch($option) {
             1 {getSchemaInfo}
-            2 {createSchema}
-            3 {deleteSchema}
+            2 {getAllSchemas}
+            3 {createSchema}
+            4 {deleteSchema}
             10 {$continue = 0}
         }
     }
@@ -32,6 +34,10 @@ function getSchemaInfo {
         $continue = Read-Host -Prompt 'Get info from another Schema? (y/n)'
         ''
     }
+}
+
+function getAllSchemas {
+    gam print schemas
 }
 
 function createSchema {
