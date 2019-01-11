@@ -37,7 +37,8 @@ function getSchemaInfo {
 }
 
 function getAllSchemas {
-    gam print schemas
+    gam show schemas
+    ''
 }
 
 function createSchema {
