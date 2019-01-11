@@ -4,7 +4,7 @@ function groupOptions {
     while($continue -eq 1) {
         'Group Options'
         '1. Get Group Info'
-        '2. Create A Group'
+        '2. Create Group'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
