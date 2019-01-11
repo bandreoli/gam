@@ -35,7 +35,7 @@ function getSchemaInfo {
 function getSchema {
     $schema = ""
     while($schema -eq "") {
-        $schema = Read-Host -Prompt 'Input Group (Required)'
+        $schema = Read-Host -Prompt 'Input Schema (Required)'
     }
     return $schema
 }
