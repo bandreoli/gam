@@ -32,6 +32,18 @@ function getSchemaInfo {
     }
 }
 
+function createSchema {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        "Creating Schema"
+
+
+
+        $continue = Read-Host -Prompt 'Create another Schema? (y/n)'
+        ''
+    }
+
 function getSchema {
     $schema = ""
     while($schema -eq "") {
