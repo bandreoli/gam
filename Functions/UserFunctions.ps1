@@ -109,6 +109,27 @@ function updateUser {
             $orgcom = ' org $org'
         }
 
+        $schemaOption = Read-Host -Prompt 'Use custom schema? (y/n)'
+
+        while($schemaOption -eq 'y') {
+            gam print schemas > files/schemas.csv 
+
+            $csv = Import-CSV files/schemas.csv
+            ''
+            "Choose a schema:"
+
+            $count = 1
+
+            $csv.schemaName | ForEach-Object {
+                "$count. $_"
+                $count++
+            }
+
+            $schemaPick = Read-Host -Prompt 'Enter Here'
+
+            $schemaOption = Read-Host -Prompt 'Use another schema? (y/n)'
+        }
+
         $command = "gam update user $username $newusernamecom $firstnamecom $lastnamecom $passwordcom $changepasswordcom $orgcom"
 
         iex $command
