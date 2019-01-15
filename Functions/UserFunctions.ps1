@@ -120,12 +120,17 @@ function updateUser {
 
             $count = 1
 
+            $list = @()
+
             $csv.schemaName | ForEach-Object {
                 "$count. $_"
+                $list += $_
                 $count++
             }
 
             $schemaPick = Read-Host -Prompt 'Enter Here'
+
+            $list[$schemaPick-1]
 
             $schemaOption = Read-Host -Prompt 'Use another schema? (y/n)'
         }

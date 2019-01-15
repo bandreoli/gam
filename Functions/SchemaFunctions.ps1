@@ -125,6 +125,34 @@ function deleteSchema {
     }
 }
 
+function schemaForUser {
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        gam print schemas > files/schemas.csv 
+
+        $csv = Import-CSV files/schemas.csv
+        ''
+        "Choose a schema:"
+
+        $count = 1
+
+        $list = @()
+
+        $csv.schemaName | ForEach-Object {
+            "$count. $_"
+            $list += $_
+            $count++
+        }
+
+        $schemaPick = Read-Host -Prompt 'Enter Here'
+
+        $list[$schemaPick-1]
+
+        $continue = Read-Host -Prompt 'Add a schema for another User? (y/n)'
+    }
+}
+
 function getSchema {
     $schema = ""
     while($schema -eq "") {
