@@ -7,6 +7,7 @@ function schemaOptions {
         '2. Get All Schemas'
         '3. Create Schema'
         '4. Delete Schema'
+        '5. Add Schema to User'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -17,6 +18,7 @@ function schemaOptions {
             2 {getAllSchemas}
             3 {createSchema}
             4 {deleteSchema}
+            5 {schemaForUser}
             10 {$continue = 0}
         }
     }
@@ -129,25 +131,33 @@ function schemaForUser {
     $continue = 'y'
 
     while($continue -eq 'y') {
-        gam print schemas > files/schemas.csv 
 
-        $csv = Import-CSV files/schemas.csv
-        ''
-        "Choose a schema:"
-
-        $count = 1
-
-        $list = @()
-
-        $csv.schemaName | ForEach-Object {
-            "$count. $_"
-            $list += $_
-            $count++
+        $username = ""
+        while($username -eq "") {
+            $username = Read-Host -Prompt 'Input Username (Required)'
         }
 
-        $schemaPick = Read-Host -Prompt 'Enter Here'
+        $newSchema = 'y'
 
-        $list[$schemaPick-1]
+        while($newSchema -eq 'y') {
+            $schemaList = gam show schemas
+
+            'Choose a Schema:'
+
+            $schemas = @()
+            $count = 0
+
+            for($i=0; $i -lt $schemaList.length; $i++) {
+                if($schemaList[$i] -Match "Schema: ") {
+                    $schema = $schemaList[$i].replace("Schema: ", "")
+                    $schemas += $schema
+                    $count++
+                    "$count. $schema"
+                }
+            }
+
+            $newSchema = Read-Host -Prompt 'Use another schema for this User? (y/n)'
+        }
 
         $continue = Read-Host -Prompt 'Add a schema for another User? (y/n)'
     }
