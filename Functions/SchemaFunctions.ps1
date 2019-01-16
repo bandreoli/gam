@@ -156,6 +156,12 @@ function schemaForUser {
                 }
             }
 
+            $schemaPick = Read-Host -Prompt 'Enter Here'
+
+            $schemaFields = gam info schema $schemas[$schemaPick-1]
+
+            $schemaFields
+
             $newSchema = Read-Host -Prompt 'Use another schema for this User? (y/n)'
         }
 
