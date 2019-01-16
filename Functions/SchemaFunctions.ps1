@@ -158,14 +158,57 @@ function schemaForUser {
 
             $schemaPick = Read-Host -Prompt 'Enter Here'
 
+            ''
+
             $schemaFields = gam info schema $schemas[$schemaPick-1]
 
-            $schemaFields
+            $gamCommand = "gam update user $username "
+
+            'Enter Fields:'
+
+            for($i=0; $i -lt $schemaFields.length; $i++) {
+                if($schemaFields[$i] -Match "Field: ") {
+                    $field = $schemaFields[$i].replace(" Field: ", "")
+                    $fieldCount = $i+2
+                    $multi = ""
+                    while(($schemaFields[$fieldCount] -notMatch "Field: ") -and ($fieldCount -lt $schemaFields.length)) {
+                        if($schemaFields[$fieldCount] -Match "fieldType") {
+                            $fieldType = $schemaFields[$fieldCount].replace("  fieldType: ", "").ToLower().replace("64", "")
+                        } elseif($schemaFields[$fieldCount] -Match "multivalued: True") {
+                            $multi = "multivalued (Leave blank to end)"
+                        }
+
+                        $fieldCount++
+                    }
+
+                    $schemaValue = $schemas[$schemaPick-1]
+
+                    if($multi -eq "") {
+                        $entry = Read-Host -Prompt "$($field) $($fieldType)"
+
+                        $gamCommand += "$schemaValue.$field '$entry' "
+                    } else {
+                        $entry = "y"
+
+                        while($entry -ne "") {
+                            $entry = Read-Host -Prompt "$($field) $($fieldType) $($multi)"
+
+                            if($entry -ne "") {
+                                $gamCommand += "$schemaValue.$field multivalued '$entry' "
+                            }
+                        }
+                    }
+                }
+            }
+
+            iex $gamCommand
 
             $newSchema = Read-Host -Prompt 'Use another schema for this User? (y/n)'
+            ''
         }
 
         $continue = Read-Host -Prompt 'Add a schema for another User? (y/n)'
+        ''
     }
 }
 
