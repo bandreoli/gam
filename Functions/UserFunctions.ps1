@@ -9,6 +9,7 @@ function userOptions {
         '4. Delete User'
         '5. Set Basic Password'
         '6. Search For Users By Name'
+        '7. Create Carroll User'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -21,6 +22,7 @@ function userOptions {
             4 {deleteUser}
             5 {setBasicPassword}
             6 {getUsersByName}
+            7 {carrollUser}
             10 {$continue = 0}
         }
     }
@@ -163,6 +165,10 @@ function getUsersByName {
         $continue = Read-Host -Prompt 'Search for another user? (y/n)'
         ''
     }
+}
+
+function carrollUser {
+    
 }
 
 function getUser {
