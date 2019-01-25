@@ -168,7 +168,33 @@ function getUsersByName {
 }
 
 function carrollUser {
-    
+    $continue = 'y'
+
+    while($continue -eq 'y') {
+        'Creating CarrollUser'
+        'Choose User Type'
+        '1. Student'
+        '2. Staff/Faculty'
+        $userType = Read-Host -Prompt 'Enter Here'
+
+        $firstname = Read-Host -Prompt 'Enter First Name'
+        $lastname = Read-Host -Prompt 'Enter Last Name'
+        $grade = Read-Host -Prompt 'Enter Grade'
+
+        $year = (get-date).year
+        $month = (get-date).month
+
+        $year
+        $month
+
+        if($userType -eq 1) {
+            $username = $firstname[0] + $lastname
+        } elseif($userType -eq 2) {
+            $username = $firstname[0] + $lastname 
+        }
+        $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
+        ''
+    }
 }
 
 function getUser {
