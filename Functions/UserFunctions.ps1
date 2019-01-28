@@ -171,7 +171,7 @@ function carrollUser {
     $continue = 'y'
 
     while($continue -eq 'y') {
-        'Creating CarrollUser'
+        'Creating Carroll User'
         'Choose User Type'
         '1. Student'
         '2. Staff/Faculty'
@@ -179,19 +179,36 @@ function carrollUser {
 
         $firstname = Read-Host -Prompt 'Enter First Name'
         $lastname = Read-Host -Prompt 'Enter Last Name'
-        $grade = Read-Host -Prompt 'Enter Grade'
-
-        $year = (get-date).year
-        $month = (get-date).month
-
-        $year
-        $month
 
         if($userType -eq 1) {
-            $username = $firstname[0] + $lastname
+            $grade = Read-Host -Prompt 'Enter Year of Graduation (yyyy)'
+            $password = Read-Host -Prompt 'Enter Password (mmddyyyy)'
+            $username = ($firstname[0] + $lastname + $grade[2] + $grade[3]).ToLower()
+            $email = $username + "@stu.carrollschool.org"
+
+            'Pick A School'
+            '1. Upper'
+            '2. Middle'
+            '3. Lower'
+            $school = Read-Host -Prompt 'Enter Here'
+
+            if($school -eq 1) {
+                $ou = "Students/Upper School/YOG " + $grade[2] + $grade[3]
+            } elseif($school -eq 2) {
+                $ou = "Students/Middle School/YOG " + $grade
+            } elseif($school -eq 3) {
+                $ou = "Students/Lower School/YOG " + $grade
+            }
+
+            iex "gam create user $username firstname $firstname lastname $lastname password $password org '$ou'"
         } elseif($userType -eq 2) {
-            $username = $firstname[0] + $lastname 
+            $grade = Read-Host -Prompt 'Enter Grade'
+            $username = ($firstname[0] + $lastname).ToLower() 
+            $email = $username + "@carrollschool.org"
+            
+            gam create user $username firstname $firstname lastname $lastname password $password changepassword on org $ou
         }
+
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
         ''
     }
