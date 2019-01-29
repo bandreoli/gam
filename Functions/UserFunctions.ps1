@@ -174,23 +174,23 @@ function carrollUser {
         'Creating Carroll User'
         'Choose User Type'
         '1. Student'
-        '2. Staff/Faculty'
+        '2. Faculty/Staff'
         $userType = Read-Host -Prompt 'Enter Here'
 
         $firstname = Read-Host -Prompt 'Enter First Name'
         $lastname = Read-Host -Prompt 'Enter Last Name'
+
+        'Pick A School'
+        '1. Upper'
+        '2. Middle'
+        '3. Lower'
+        $school = Read-Host -Prompt 'Enter Here'
 
         if($userType -eq 1) {
             $grade = Read-Host -Prompt 'Enter Year of Graduation (yyyy)'
             $password = Read-Host -Prompt 'Enter Password (mmddyyyy)'
             $username = ($firstname[0] + $lastname + $grade[2] + $grade[3]).ToLower()
             $email = $username + "@stu.carrollschool.org"
-
-            'Pick A School'
-            '1. Upper'
-            '2. Middle'
-            '3. Lower'
-            $school = Read-Host -Prompt 'Enter Here'
 
             if($school -eq 1) {
                 $ou = "Students/Upper School/YOG " + $grade[2] + $grade[3]
@@ -202,11 +202,18 @@ function carrollUser {
 
             iex "gam create user $username firstname $firstname lastname $lastname password $password org '$ou'"
         } elseif($userType -eq 2) {
-            $grade = Read-Host -Prompt 'Enter Grade'
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
             
-            gam create user $username firstname $firstname lastname $lastname password $password changepassword on org $ou
+            if($school -eq 1) {
+                $ou = "Faculty/Upper School"
+            } elseif($school -eq 2) {
+                $ou = "Faculty/Middle School"
+            } elseif($school -eq 3) {
+                $ou = "Faculty/Lower School"
+            }
+
+            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on org '$ou'"
         }
 
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
