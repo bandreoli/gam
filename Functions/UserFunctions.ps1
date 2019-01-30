@@ -174,7 +174,8 @@ function carrollUser {
         'Creating Carroll User'
         'Choose User Type'
         '1. Student'
-        '2. Faculty/Staff'
+        '2. Faculty'
+        '3. Staff'
         $userType = Read-Host -Prompt 'Enter Here'
 
         $firstname = Read-Host -Prompt 'Enter First Name'
@@ -204,14 +205,17 @@ function carrollUser {
         } elseif($userType -eq 2) {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
+            $grade = Read-Host -Prompt 'Enter Grade'
             
-            if($school -eq 1) {
-                $ou = "Faculty/Upper School"
-            } elseif($school -eq 2) {
-                $ou = "Faculty/Middle School"
-            } elseif($school -eq 3) {
-                $ou = "Faculty/Lower School"
-            }
+            $ou = getSchoolOU($school)
+
+            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on org '$ou'"
+        } elseif($userType -eq 3) {
+            $username = ($firstname[0] + $lastname).ToLower() 
+            $email = $username + "@carrollschool.org"
+            $dept = Read-Host -Prompt 'Enter Department'
+
+            $ou = getSchoolOU($school)
 
             iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on org '$ou'"
         }
@@ -219,6 +223,18 @@ function carrollUser {
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
         ''
     }
+}
+
+function getSchoolOU($school) {
+    $ou = ""
+    if($school -eq 1) {
+        $ou = "Faculty/Upper School"
+    } elseif($school -eq 2) {
+        $ou = "Faculty/Middle School"
+    } elseif($school -eq 3) {
+        $ou = "Faculty/Lower School"
+    }
+    return $ou
 }
 
 function getUser {
