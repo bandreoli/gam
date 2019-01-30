@@ -48,12 +48,8 @@ function createOU {
         if($desc -ne '') {
             $descCom = " description '$desc'"
         }
-        $parent = Read-Host -Prompt 'Parent OU'
-        if($parent -ne '') {
-            $parentCom = " parent '$parent'"
-        }
 
-        $command = "gam create org '$ou' $descCom $parentCom"
+        $command = "gam create org '$ou' $descCom"
 
         iex $command
 
