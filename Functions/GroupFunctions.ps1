@@ -5,6 +5,7 @@ function groupOptions {
         'Group Options'
         '1. Get Group Info'
         '2. Create Group'
+        '3. Show All Groups'
         '10. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -13,6 +14,7 @@ function groupOptions {
         switch($option) {
             1 {getGroupInfo}
             2 {createGroup}
+            3 {printGroups}
             10 {$continue = 0}
         }
     }
@@ -65,6 +67,11 @@ function deleteGroup {
         $continue = Read-Host -Prompt 'Delete another Group? (y/n)'
         ''
     }
+}
+
+function printGroups {
+    gam print groups name description members
+    ''
 }
 
 function getGroup {
