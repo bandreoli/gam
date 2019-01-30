@@ -225,6 +225,7 @@ function carrollUser {
 
             getSchoolOU $school $username
 
+            iex "gam update group $dept add member user $username"
         }
 
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
