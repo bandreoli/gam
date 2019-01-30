@@ -195,13 +195,17 @@ function carrollUser {
 
             if($school -eq 1) {
                 $ou = "Students/Upper School/YOG " + $grade[2] + $grade[3]
+                $group = "YOG" + $grade[2] + $grade[3]
             } elseif($school -eq 2) {
                 $ou = "Students/Middle School/YOG " + $grade
+                $group = "YOG" + $grade
             } elseif($school -eq 3) {
                 $ou = "Students/Lower School/YOG " + $grade
+                $group = "YOG" + $grade
             }
 
             iex "gam create user $username firstname $firstname lastname $lastname password $password org '$ou'"
+            iex "gam update group $group add member user $username"
         } elseif($userType -eq 2) {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
