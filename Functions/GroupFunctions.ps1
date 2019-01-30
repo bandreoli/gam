@@ -40,11 +40,16 @@ function createGroup {
     $continue = 'y'
 
     while($continue -eq 'y') {
-        "Creating Another Group"
+        "Creating Group"
 
         $group = getGroup
 
-        iex "gam create group '$group'"
+        $desc = Read-Host -Prompt 'Description'
+        if($desc -ne "") {
+            $description = "description '$desc'"
+        }
+
+        iex "gam create group '$group' $description"
 
         $continue = Read-Host -Prompt 'Create another Group? (y/n)'
         ''
