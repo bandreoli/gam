@@ -209,11 +209,13 @@ function carrollUser {
         } elseif($userType -eq 2) {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
-            $grade = Read-Host -Prompt 'Enter Grade'
+            $grade = "Grade" + Read-Host -Prompt 'Enter Grade'
 
             iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
 
             getSchoolOU $school $username
+
+            iex "gam update group $grade add member user $username"
         } elseif($userType -eq 3) {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
@@ -222,6 +224,7 @@ function carrollUser {
             iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
 
             getSchoolOU $school $username
+
         }
 
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
