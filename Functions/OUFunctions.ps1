@@ -7,7 +7,7 @@ function ouOptions {
         '2. Create OU'
         '3. Delete OU'
         '4. Add users to OU'
-        '10. Return'
+        '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -17,7 +17,7 @@ function ouOptions {
             2 {createOU}
             3 {deleteOU}
             4 {addUsersToOU}
-            10 {$continue = 0}
+            0 {$continue = 0}
         }
     }
 }

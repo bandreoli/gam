@@ -7,7 +7,7 @@ function groupOptions {
         '2. Create Group'
         '3. Show All Groups'
         '4. Delete Group'
-        '10. Return'
+        '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -17,7 +17,7 @@ function groupOptions {
             2 {createGroup}
             3 {printGroups}
             4 {deleteGroup}
-            10 {$continue = 0}
+            0 {$continue = 0}
         }
     }
 }

@@ -10,7 +10,7 @@ function userOptions {
         '5. Set Basic Password'
         '6. Search For Users By Name'
         '7. Create Carroll User'
-        '10. Return'
+        '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -23,7 +23,7 @@ function userOptions {
             5 {setBasicPassword}
             6 {getUsersByName}
             7 {carrollUser}
-            10 {$continue = 0}
+            0 {$continue = 0}
         }
     }
 }

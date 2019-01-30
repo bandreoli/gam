@@ -8,7 +8,7 @@ function schemaOptions {
         '3. Create Schema'
         '4. Delete Schema'
         '5. Add Schema to User'
-        '10. Return'
+        '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
         ''
@@ -19,7 +19,7 @@ function schemaOptions {
             3 {createSchema}
             4 {deleteSchema}
             5 {schemaForUser}
-            10 {$continue = 0}
+            0 {$continue = 0}
         }
     }
 }
