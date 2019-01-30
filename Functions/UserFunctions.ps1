@@ -210,18 +210,18 @@ function carrollUser {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
             $grade = Read-Host -Prompt 'Enter Grade'
-            
-            $ou = getSchoolOU($school)
 
-            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on org '$ou'"
+            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
+
+            getSchoolOU $school $username
         } elseif($userType -eq 3) {
             $username = ($firstname[0] + $lastname).ToLower() 
             $email = $username + "@carrollschool.org"
             $dept = Read-Host -Prompt 'Enter Department'
 
-            $ou = getSchoolOU($school)
+            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
 
-            iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on org '$ou'"
+            getSchoolOU $school $username
         }
 
         $continue = Read-Host -Prompt 'Create another Carroll user? (y/n)'
@@ -229,16 +229,17 @@ function carrollUser {
     }
 }
 
-function getSchoolOU($school) {
-    $ou = ""
+function getSchoolOU($school, $username) {
     if($school -eq 1) {
-        $ou = "Faculty/Upper School"
+        iex "gam update user $username org 'Faculty/Upper School'"
+        iex "gam update group 'upperschool' add member user $username"
     } elseif($school -eq 2) {
-        $ou = "Faculty/Middle School"
+        iex "gam update user $username org 'Faculty/Middle School'"
+        iex "gam update group 'middleschool' add member user $username"
     } elseif($school -eq 3) {
-        $ou = "Faculty/Lower School"
+        iex "gam update user $username org 'Faculty/Lower School'"
+        iex "gam update group 'lowerschool' add member user $username"
     }
-    return $ou
 }
 
 function getUser {
