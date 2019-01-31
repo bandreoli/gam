@@ -10,7 +10,7 @@ function userOptions {
         '5. Set Basic Password'
         '6. Search For Users By Name'
         '7. Create Carroll User'
-        '8. Create Carroll Users From File'
+        '8. Create Carroll Students From File'
         '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -24,7 +24,7 @@ function userOptions {
             5 {setBasicPassword}
             6 {getUsersByName}
             7 {carrollUser}
-            8 {carrollUsersFromFile}
+            8 {carrollStudentsFromFile}
             0 {$continue = 0}
         }
     }
@@ -252,8 +252,12 @@ function carrollUser {
     }
 }
 
-function carrollUsersFromFile {
+function carrollStudentsFromFile {
+    $csv = Import-Csv ../files/CarrollStudents.csv
 
+    foreach($line in $csv) {
+        
+    }
 }
 
 function getFacultyOU($school, $username) {
