@@ -67,7 +67,11 @@ function deleteOU {
 
         $ou = getOU
 
-        gam delete org $ou
+        $delete = Read-Host -Prompt "Are you sure you want to delete $ou ? (y/n)"
+
+        if($delete -eq 'y') {
+            gam delete org $ou
+        }
 
         $continue = Read-Host -Prompt 'Delete another OU? (y/n)'
         ''
