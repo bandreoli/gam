@@ -10,6 +10,7 @@ function userOptions {
         '5. Set Basic Password'
         '6. Search For Users By Name'
         '7. Create Carroll User'
+        '8. Create Carroll Users From File'
         '0. Return'
 
         $option = Read-Host -Prompt 'Enter Here'
@@ -23,6 +24,7 @@ function userOptions {
             5 {setBasicPassword}
             6 {getUsersByName}
             7 {carrollUser}
+            8 {carrollUsersFromFile}
             0 {$continue = 0}
         }
     }
@@ -214,7 +216,7 @@ function carrollUser {
 
             iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
 
-            getSchoolOU $school $username
+            getFacultyOU $school $username
 
             iex "gam update group $grade add member user $username"
         } elseif($userType -eq 3) {
@@ -238,7 +240,9 @@ function carrollUser {
 
             iex "gam create user $username firstname $firstname lastname $lastname password 'Password123' changepassword on"
 
-            getSchoolOU $school $username
+            getStaffOU $school $username
+
+            iex "gam update user $username org 'Staff/$department'"
 
             iex "gam update group $department add member user $username"
         }
@@ -248,7 +252,11 @@ function carrollUser {
     }
 }
 
-function getSchoolOU($school, $username) {
+function carrollUsersFromFile {
+
+}
+
+function getFacultyOU($school, $username) {
     if($school -eq 1) {
         iex "gam update user $username org 'Faculty/Upper School'"
         iex "gam update group 'upperschool' add member user $username"
@@ -257,6 +265,16 @@ function getSchoolOU($school, $username) {
         iex "gam update group 'middleschool' add member user $username"
     } elseif($school -eq 3) {
         iex "gam update user $username org 'Faculty/Lower School'"
+        iex "gam update group 'lowerschool' add member user $username"
+    }
+}
+
+function getStaffOU($school, $username) {
+    if($school -eq 1) {
+        iex "gam update group 'upperschool' add member user $username"
+    } elseif($school -eq 2) {
+        iex "gam update group 'middleschool' add member user $username"
+    } elseif($school -eq 3) {
         iex "gam update group 'lowerschool' add member user $username"
     }
 }
