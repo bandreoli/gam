@@ -261,7 +261,21 @@ function carrollStudentsFromFile {
         $yog = $line.yog
         $school = $line.school
         $password = $line.birthdate
+
+        $username = ($firstname[0] + $lastname + $yog[2] + $yog[3]).ToLower()
+
+        if($school -eq 'Upper') {
+            $ouYear = $yog[2] + $yog[3]
+        } else {
+            $ouYear = $yog
+        }
+
+        $ou = "Students/'$school' School/YOG $ouYear"
+
+        iex "gam create user $username firstname $firstname lastname $lastname password $password org '$ou'"
     }
+
+    ''
 }
 
 function getFacultyOU($school, $username) {
