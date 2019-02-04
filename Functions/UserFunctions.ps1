@@ -253,10 +253,14 @@ function carrollUser {
 }
 
 function carrollStudentsFromFile {
-    $csv = Import-Csv ../files/CarrollStudents.csv
+    $csv = Import-Csv files/CarrollStudents.csv
 
     foreach($line in $csv) {
-        
+        $firstname = $line.firstname
+        $lastname = $line.lastname
+        $yog = $line.yog
+        $school = $line.school
+        $password = $line.birthdate
     }
 }
 
